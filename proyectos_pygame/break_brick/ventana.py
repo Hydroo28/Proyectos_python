@@ -44,23 +44,46 @@ while True:
             
     #Pintamos la ventana de negro
    
-    ventana.fill(negro)
+    ventana.fill(negro)    ####Esto lo voy a cambiar de sitio 
     
-    #Creamos los ladrillos de la primera fila.
-    ladrillos.crearBloquesMoradosFila1(ventana, morado)
-    ladrillos.crearBloquesRosasFila1(ventana, rosa_palo)
-    ladrillos.crearBloquesAmarillosFila1(ventana, verde)
-    ladrillos.crearBloquesAzulesfila1(ventana, azul_cielo)
+    # #Creamos los ladrillos de la primera fila.
+    # ladrillos.crearBloquesMoradosFila1(ventana, morado)
+    # ladrillos.crearBloquesRosasFila1(ventana, rosa_palo)
+    # ladrillos.crearBloquesAmarillosFila1(ventana, verde)
+    # ladrillos.crearBloquesAzulesfila1(ventana, azul_cielo)
 
+    
+    personajes.crearCuadrado(ventana, blanco)
+    personajes.moverPersonaje()
+    personajes.colisionPlataforma(tamaño)
 
+    
+    # Si la bola está quieta, mantenerla pegada a la plataforma
+    if personajes.bolita.vel_x == 0 and personajes.bolita.vel_y == 0:
+        personajes.bolita.x = personajes.plataforma.x + personajes.plataforma.w // 2
+        personajes.bolita.y = personajes.plataforma.y - personajes.bolita.r
+    else:
+        # Si la bola está en movimiento, actualizar su posición
+        personajes.moverBola(tamaño)
 
     personajes.crearBola(ventana, blanco)
+    personajes.lanzarBola()
+    
+    
+    # print(personajes.bolita.x, personajes.bolita.y)
+    
+    # print(personajes.bolita.x, personajes.bolita.y)
 
-    personajes.crearCuadrado(ventana, blanco)
+    
 
-    personajes.moverPersonaje()
 
-    personajes.colisionVentana(tamaño)
 
+    
+
+    
+
+    
+    print(personajes.bolita.x, personajes.bolita.y, personajes.plataforma.x, personajes.plataforma.y)
+    
     pygame.display.update()
     pygame.time.Clock().tick(60)
